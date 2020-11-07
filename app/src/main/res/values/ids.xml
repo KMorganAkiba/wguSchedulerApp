@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="addAssesmentButton" type="id" />
+    <item name="assessmentListView" type="id" />
+    <item name="courseNotesButton" type="id" />
+    <item name="textView15" type="id" />
+    <item name="courseMentorsButton" type="id" />
+    <item name="textView14" type="id" />
+    <item name="courseStatusTextField" type="id" />
+    <item name="textView13" type="id" />
+    <item name="courseEndTextField" type="id" />
+</resources>
