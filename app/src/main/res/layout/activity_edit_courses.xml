@@ -108,11 +108,11 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="54dp"
-        android:onClick="startCourseAlarmButton"
+        android:layout_marginTop="30dp"
+        android:onClick="startCourseAlarm"
         android:text="Set Course Start Alarm"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCourseStatus" />
+        app:layout_constraintTop_toBottomOf="@+id/courseStatusDropdown" />
 
     <Button
         android:id="@+id/courseEndAlarmButton"
@@ -120,8 +120,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="79dp"
         android:layout_marginTop="20dp"
-        android:onClick="setCourseEndAlarmButton"
         android:text="Set Course end alarm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/courseStartAlarmButton" />
+
+    <Spinner
+        android:id="@+id/courseStatusDropdown"
+        android:layout_width="211dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="116dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCourseStatus" />
 </androidx.constraintlayout.widget.ConstraintLayout>
