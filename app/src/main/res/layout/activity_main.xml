@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
@@ -25,11 +31,13 @@
         android:id="@+id/button2"
         android:layout_width="380dp"
         android:layout_height="40dp"
+        android:layout_marginTop="350dp"
         android:layout_marginEnd="16dp"
         android:onClick="viewAllTerm"
         android:text="View All Terms"
         app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
         android:id="@+id/button7"
@@ -135,3 +143,4 @@
         app:layout_constraintTop_toBottomOf="@+id/coursesRemaingingTextField" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

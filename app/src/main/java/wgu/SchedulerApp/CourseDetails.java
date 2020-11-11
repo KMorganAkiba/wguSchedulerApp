@@ -32,7 +32,6 @@ public class CourseDetails extends AppCompatActivity {
     int courseId;
     int termId;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +55,7 @@ public class CourseDetails extends AppCompatActivity {
                 int assessmentId = db.assessmentsDAO().getAssessmentsList(courseId).get(position).getAssessment_id();
                 intent.putExtra("courseId",courseId);
                 intent.putExtra("assessmentId",assessmentId);
+                intent.putExtra("termId",termId);
                 startActivity(intent);
             } );
             updateAssessments();
