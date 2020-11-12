@@ -1,17 +1,11 @@
 package wgu.SchedulerApp;
 
 import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +17,7 @@ import java.util.List;
 
 public class EditCoursesActivity extends AppCompatActivity {
     static final String LOG_TAG = "editCourseLog";
+    public static int numAlert;
     TextView courseNameTextView;
     TextView courseStartTextView;
     TextView courseEndTextView;
@@ -36,10 +31,7 @@ public class EditCoursesActivity extends AppCompatActivity {
     int termId;
     SimpleDateFormat formatter;
     Courses updateCourse;
-    String selectedSpinner;
-    Spinner spinner;
-
-
+    String courseNotes;
 
 
     @Override
@@ -59,21 +51,8 @@ public class EditCoursesActivity extends AppCompatActivity {
         courseStatusTextView = findViewById(R.id.editCourseStatus);
         startAlarm = findViewById(R.id.courseStartAlarmButton);
         endAlarm = findViewById(R.id.courseEndAlarmButton);
-        //drop down box info
-        spinner = (Spinner) findViewById(R.id.courseStatusDropdown);
-        ArrayAdapter<CharSequence>adapter = ArrayAdapter.createFromResource(this,R.array.course_status,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedSpinner = spinner.getItemAtPosition(position).toString();
-                courseStatusTextView.setText(selectedSpinner);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        String courseNotes = "";
+
         insertCourseDetails();
 
     }
@@ -88,6 +67,7 @@ public class EditCoursesActivity extends AppCompatActivity {
             courseStartTextView.setText(start);
             courseEndTextView.setText(end);
             courseStatusTextView.setText(selectedCourse.getCourse_status());
+            courseNotes = selectedCourse.getCourse_notes();
         }
         else{
             selectedCourse = new Courses();
@@ -136,6 +116,7 @@ public class EditCoursesActivity extends AppCompatActivity {
         }
 
         updateCourse.setCourse_status(courseStatusTextView.getText().toString());
+        updateCourse.setCourse_notes(courseNotes);
         db.coursesDAO().updateCourse(updateCourse);
         Intent intent = new Intent(getApplicationContext(),CourseDetails.class);
         intent.putExtra("courseId",courseId);
@@ -144,42 +125,24 @@ public class EditCoursesActivity extends AppCompatActivity {
     }
 
     public void startCourseAlarm(View view) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "WGUTermReminderChannel";
-            String desc = "Chanel for course reminder";
-            int important = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel("startNotification",name,important);
-            channel.setDescription(desc);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
 
         Toast.makeText(this,"Start Alarm is Set", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(EditCoursesActivity.this,MyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(EditCoursesActivity.this,0,intent,0);
+        intent.putExtra("key", selectedCourse.getCourse_name() + " Starts Today!");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(EditCoursesActivity.this,++numAlert,intent,0);
         Long sal = selectedCourse.getCourse_start().getTime();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,sal,pendingIntent);
     }
 
     public void endCourseAlarm(View view) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "WGUTermReminderChannel";
-            String desc = "Chanel for course reminder";
-            int important = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel("endNotification",name,important);
-            channel.setDescription(desc);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
 
         Toast.makeText(this," End Alarm is Set", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(EditCoursesActivity.this,MyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(EditCoursesActivity.this,0,intent,0);
+        intent.putExtra("key", selectedCourse.getCourse_name() + " ends today." );
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(EditCoursesActivity.this,++numAlert,intent,0);
         Long eal = selectedCourse.getCourse_end().getTime();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,eal,pendingIntent);

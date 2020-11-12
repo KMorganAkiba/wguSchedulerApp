@@ -18,6 +18,7 @@ import java.util.Date;
 
 public class AssessmentsActivity extends AppCompatActivity {
     static final String LOG_TAG = "editAssessmentLog";
+    public static int numAlert;
     TextView assessmentNameTextView;
     TextView assessmentTypeTextView;
     TextView assessmentDueDateTextView;
@@ -94,21 +95,12 @@ public class AssessmentsActivity extends AppCompatActivity {
     }
 
     public void assessmentAlarm(View view) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "WGUTermReminderChannel";
-            String desc = "Chanel for course reminder";
-            int important = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel("assessmentNotification",name,important);
-            channel.setDescription(desc);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
 
         Toast.makeText(this,"Assessment Alarm is Set", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(AssessmentsActivity.this,MyReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(AssessmentsActivity.this,0,intent,0);
+        intent.putExtra("key", selectedAssessment.getAssessment_name() + " is Due Today!" );
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(AssessmentsActivity.this, ++numAlert ,intent,0);
         Long aDD = selectedAssessment.getAssessment_due_date().getTime();
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,aDD,pendingIntent);

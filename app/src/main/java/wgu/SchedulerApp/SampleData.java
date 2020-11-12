@@ -83,7 +83,7 @@ public class SampleData extends AppCompatActivity {
         sampleMentor.setMentor_name("Carolyn");
         sampleMentor.setMentor_phone("385-428-7192");
         sampleMentor.setMentor_email("carolyn.sher@wgu.edu");
-        sampleAssessment.setCourse_id_fk(coursesList.get(0).getCourse_id());
+        sampleMentor.setCourse_id_fk(coursesList.get(0).getCourse_id());
 
         DB.mentorsDAO().insertMentor(sampleMentor);
     }

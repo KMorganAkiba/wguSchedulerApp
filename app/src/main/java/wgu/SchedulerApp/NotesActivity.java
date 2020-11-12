@@ -8,8 +8,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +19,6 @@ import android.widget.Toast;
 
 public class NotesActivity extends AppCompatActivity {
     private final String LOG_TAG = "NotesLog";
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     TermAppDatabase db;
     TextView notesTextView;
     int courseId;
@@ -46,12 +47,7 @@ public class NotesActivity extends AppCompatActivity {
         selectedCourse = db.coursesDAO().getCourses(courseId,termId);
         populateNotes();
 
-        sendSMS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendTxtMessage();
-            }
-        });
+        sendSMS.setOnClickListener(v -> sendTxtMessage());
     }
 
     private void populateNotes(){
@@ -62,35 +58,27 @@ public class NotesActivity extends AppCompatActivity {
     protected void sendTxtMessage(){
         txtNumber = phoneNumber.getText().toString();
         notes = notesTextView.getText().toString();
+        if (txtNumber.isEmpty()){
+            Toast.makeText(NotesActivity.this,"Please enter a phone number.",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else {
+            Log.i("Send SMS", "");
+            Intent smsIntent = new Intent(Intent.ACTION_VIEW);
 
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-            != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.SEND_SMS)){}
-            else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS},MY_PERMISSIONS_REQUEST_SEND_SMS);
+
+            smsIntent.setType("vnd.android-dir/mms-sms");
+            smsIntent.setData(Uri.parse("smsto:")).putExtra("address", txtNumber);
+            smsIntent.putExtra("sms_body", notes);
+            try {
+                startActivity(smsIntent);
+                finish();
+                Log.i("Finished sending SMS....", "");
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(NotesActivity.this, "SMS failed, please try again later.", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
-        switch (requestCode){
-            case MY_PERMISSIONS_REQUEST_SEND_SMS:{
-                if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(txtNumber,null,notes,null,null);
-                    Toast.makeText(getApplicationContext(),"SMS Sent.",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"SMS Failed", Toast.LENGTH_LONG).show();
-                    return;
-                }
-            }
-        }
-    }
-
 
     public void saveNotes(View view) {
 

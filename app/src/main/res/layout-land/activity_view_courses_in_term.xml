@@ -12,12 +12,23 @@
     android:layout_height="wrap_content"
     tools:context=".ViewCoursesInTerm">
 
+    <TextView
+        android:id="@+id/termNameTextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="332dp"
+        android:layout_marginTop="24dp"
+        android:text="termName"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addCourse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="200dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
@@ -30,7 +41,7 @@
         android:id="@+id/editTermInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="190dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,21 +49,10 @@
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <TextView
-        android:id="@+id/termNameTextField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="16dp"
-        android:text="termName"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="72dp"
         android:text="Term Starts: "
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="16dp"
         android:text="Term Ends: "
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:text="termstart"
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/termNameTextField" />
@@ -92,7 +92,7 @@
         android:id="@+id/coursesListView"
         android:layout_width="375dp"
         android:layout_height="500dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="175dp"
         android:layout_marginTop="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />

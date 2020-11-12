@@ -15,24 +15,25 @@
         <receiver
             android:name=".MyReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true">
+        </receiver>
 
         <activity android:name=".NotesActivity" />
         <activity
             android:name=".MentorsActivity"
-            android:parentActivityName=".CourseDetails" />
+            />
         <activity
             android:name=".CourseDetails"
-            android:parentActivityName=".ViewCoursesInTerm" />
+            />
         <activity android:name=".EditCoursesActivity" />
         <activity
             android:name=".ViewCoursesInTerm"
-            android:parentActivityName=".ViewAllTerms" />
+            />
         <activity android:name=".EditTermsActivity" />
         <activity android:name=".EditMentorsActivity" />
         <activity
             android:name=".ViewAllTerms"
-            android:parentActivityName=".MainActivity" />
+             />
         <activity android:name=".AssessmentsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
