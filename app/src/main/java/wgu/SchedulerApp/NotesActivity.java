@@ -55,9 +55,11 @@ public class NotesActivity extends AppCompatActivity {
 
     }
 
+    //handles the functionality of passing the notes and phone number to the sms screen.
     protected void sendTxtMessage(){
         txtNumber = phoneNumber.getText().toString();
         notes = notesTextView.getText().toString();
+        //prevents the screen from changing if no number is present
         if (txtNumber.isEmpty()){
             Toast.makeText(NotesActivity.this,"Please enter a phone number.",Toast.LENGTH_SHORT).show();
             return;
@@ -80,6 +82,7 @@ public class NotesActivity extends AppCompatActivity {
         }
     }
 
+    //saves data to the notes field in the courses table only
     public void saveNotes(View view) {
 
        String courseNotes =  notesTextView.getText().toString();

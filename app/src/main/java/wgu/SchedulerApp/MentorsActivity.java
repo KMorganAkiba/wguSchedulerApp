@@ -38,7 +38,7 @@ public class MentorsActivity extends AppCompatActivity {
             startActivity(intent);
         });
        updateMentors();
-
+        //adds a placeholder mentor into the database to be edited later
         FloatingActionButton addMentor = findViewById(R.id.addMentor);
         addMentor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +54,7 @@ public class MentorsActivity extends AppCompatActivity {
             }
         });
     }
+    //handles populating the list view of mentors.
     private void updateMentors(){
         List<Mentors> mentors = new ArrayList<>();
         try{

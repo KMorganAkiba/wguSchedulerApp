@@ -50,6 +50,8 @@ public class CourseDetails extends AppCompatActivity {
         courseEndTextView = findViewById(R.id.courseEndTextField);
         courseStatusTextView = findViewById(R.id.courseStatusTextField);
         updateCourseDetails();
+
+        //handles sending the user to the assessment screen to edit assessment details
             assessmentsListView.setOnItemClickListener((parent, view, position, id) -> {
                 Intent intent = new Intent(getApplicationContext(),AssessmentsActivity.class);
                 int assessmentId = db.assessmentsDAO().getAssessmentsList(courseId).get(position).getAssessment_id();
@@ -59,7 +61,7 @@ public class CourseDetails extends AppCompatActivity {
                 startActivity(intent);
             } );
             updateAssessments();
-
+        //adds a placeholder assessment to be edited later.
         FloatingActionButton addAssessments = findViewById(R.id.addAssesmentButton);
         addAssessments.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +78,7 @@ public class CourseDetails extends AppCompatActivity {
                 updateAssessments();
             }
         });
-
+        //passes the information to the edit course activity.
         FloatingActionButton editCourse = findViewById(R.id.editCourseDetailsButton);
         editCourse.setOnClickListener(v -> {
             Courses editCourseDetails = db.coursesDAO().getCourses(courseId, termId);
@@ -87,6 +89,7 @@ public class CourseDetails extends AppCompatActivity {
         });
     }
 
+    //populates all the fields with data from the database.
     private void updateCourseDetails(){
         if(selectedCourse != null){
             Date startDate = selectedCourse.getCourse_start();
@@ -103,6 +106,7 @@ public class CourseDetails extends AppCompatActivity {
         }
     }
 
+    //handler for controlling the assessments list view
     private void updateAssessments(){
         List<Assessments> assessments = new ArrayList<>();
         try{
@@ -127,13 +131,13 @@ public class CourseDetails extends AppCompatActivity {
         updateCourseDetails();
         updateAssessments();
     }
-
+    //sends the course id to the mentor activity
     public void mentorsList(View view) {
         Intent intent = new Intent(getApplicationContext(),MentorsActivity.class);
         intent.putExtra("courseId", courseId);
         startActivity(intent);
     }
-
+    //sends the course id and term id to the notes activity.
     public void courseNotes(View view) {
         Intent intent = new Intent(getApplicationContext(),NotesActivity.class);
         intent.putExtra("courseId", courseId);

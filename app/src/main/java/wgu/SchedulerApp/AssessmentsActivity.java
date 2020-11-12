@@ -51,6 +51,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         insertAssessmentDetails();
     }
 
+    //sets the fields with information from the database
     private void insertAssessmentDetails(){
         if(selectedAssessment != null){
             Date dueDate = selectedAssessment.getAssessment_due_date();
@@ -65,6 +66,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         }
     }
 
+    //deletes the selected assessment from the database
     public void deleteAssessment(View view) {
         db.assessmentsDAO().deleteAssessment(selectedAssessment);
         Intent intent = new Intent(this, CourseDetails.class);
@@ -73,6 +75,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //updates the database record with information from the text fields
     public void saveAssessment(View view) {
         updateAssessment = new Assessments();
         updateAssessment.setAssessment_id(assessmentId);
@@ -94,6 +97,7 @@ public class AssessmentsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //handles alarm functionality for duedate alarm
     public void assessmentAlarm(View view) {
 
         Toast.makeText(this,"Assessment Alarm is Set", Toast.LENGTH_SHORT).show();

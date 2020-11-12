@@ -38,6 +38,7 @@ public class ViewAllTerms extends AppCompatActivity {
         });
         updateData();
 
+        //adds a blank term to the terms listview that can be selected and edited in the preceding views
         FloatingActionButton addTerm = findViewById(R.id.addTermButton);
         addTerm.setOnClickListener(new View.OnClickListener() {
             @Override

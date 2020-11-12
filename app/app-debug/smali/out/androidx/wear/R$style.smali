@@ -1,0 +1,59 @@
+.class public final Landroidx/wear/R$style;
+.super Ljava/lang/Object;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Landroidx/wear/R;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x19
+    name = "style"
+.end annotation
+
+
+# static fields
+.field public static final ConfirmationActivity:I = 0x7f1000c7
+
+.field public static final TextAppearance_Compat_Notification:I = 0x7f100117
+
+.field public static final TextAppearance_Compat_Notification_Info:I = 0x7f100118
+
+.field public static final TextAppearance_Compat_Notification_Line2:I = 0x7f100119
+
+.field public static final TextAppearance_Compat_Notification_Time:I = 0x7f10011a
+
+.field public static final TextAppearance_Compat_Notification_Title:I = 0x7f10011b
+
+.field public static final Widget_Compat_NotificationActionContainer:I = 0x7f1001c5
+
+.field public static final Widget_Compat_NotificationActionText:I = 0x7f1001c6
+
+.field public static final Widget_Support_CoordinatorLayout:I = 0x7f1001f5
+
+.field public static final Widget_Wear_RoundSwitch:I = 0x7f1001f6
+
+.field public static final Widget_Wear_WearableDrawerView:I = 0x7f1001f7
+
+.field public static final WsHorizontalGuideStyle:I = 0x7f1001f8
+
+.field public static final WsPageIndicatorViewStyle:I = 0x7f1001f9
+
+.field public static final WsSinglePageNavDrawerIconStyle:I = 0x7f1001fa
+
+.field public static final WsVerticalGuideStyle:I = 0x7f1001fb
+
+.field public static final WsWearableActionDrawerItemText:I = 0x7f1001fc
+
+.field public static final WsWearableActionDrawerTitleText:I = 0x7f1001fd
+
+
+# direct methods
+.method private constructor <init>()V
+    .registers 1
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method

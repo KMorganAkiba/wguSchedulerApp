@@ -56,7 +56,7 @@ public class EditCoursesActivity extends AppCompatActivity {
         insertCourseDetails();
 
     }
-
+    //grabs the data from the database and populates the fields
     private void insertCourseDetails(){
         if(selectedCourse != null){
             Date StartDate = selectedCourse.getCourse_start();
@@ -73,7 +73,9 @@ public class EditCoursesActivity extends AppCompatActivity {
             selectedCourse = new Courses();
         }
     }
+    //handles deleting of a course from the term
     public void deleteCourse(View view) {
+       //checks to see if there are any assessments tied to the course that would prevent deletion.
         if(selectedCourse != null)
         {
             List<Assessments>assessmentsList = new ArrayList<>();
@@ -100,7 +102,7 @@ public class EditCoursesActivity extends AppCompatActivity {
         }
 
     }
-
+    //sends the updated information over to the database for storage.
     public void updateCourseInfo(View view) {
         updateCourse = new Courses();
         updateCourse.setCourse_id(courseId);
@@ -123,7 +125,7 @@ public class EditCoursesActivity extends AppCompatActivity {
         intent.putExtra("termId", termId);
         startActivity(intent);
     }
-
+//handler for setting notifications for when the course starts
     public void startCourseAlarm(View view) {
 
         Toast.makeText(this,"Start Alarm is Set", Toast.LENGTH_SHORT).show();
@@ -135,7 +137,7 @@ public class EditCoursesActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,sal,pendingIntent);
     }
-
+//handler for seeting notifications for when the course ends.
     public void endCourseAlarm(View view) {
 
         Toast.makeText(this," End Alarm is Set", Toast.LENGTH_SHORT).show();

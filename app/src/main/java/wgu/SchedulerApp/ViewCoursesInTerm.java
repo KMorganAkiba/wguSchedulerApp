@@ -84,7 +84,7 @@ public class ViewCoursesInTerm extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
+    //sets the fields in the activity with data from the database.
     private void updateDetails(){
         if(selectedTerm != null){
             Date startDate = selectedTerm.getTerm_start();
@@ -100,6 +100,7 @@ public class ViewCoursesInTerm extends AppCompatActivity {
         }
     }
 
+    //adapter used to populate the listview of courses
     private void updateCourses(){
         List<Courses> courses = new ArrayList<>();
         try{

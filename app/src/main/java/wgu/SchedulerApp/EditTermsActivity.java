@@ -42,6 +42,8 @@ public class EditTermsActivity extends AppCompatActivity {
         insertTermDetails();
 
     }
+
+    //populates the fields with the data from the database
     private void insertTermDetails(){
         if(selectedTerm != null){
             Date StartDate = selectedTerm.getTerm_start();
@@ -57,7 +59,7 @@ public class EditTermsActivity extends AppCompatActivity {
         }
     }
 
-
+    //handles updating the information in the database
     public void updateTermsDetail(View view) {
         updateTerms = new Terms();
         updateTerms.setTerm_id(termId);
@@ -75,8 +77,9 @@ public class EditTermsActivity extends AppCompatActivity {
         intent.putExtra("termId",termId);
         startActivity(intent);
     }
-
+//handles removing the term data from the database
     public void deleteTerm(View view) {
+        //checks to make sure there are no assigned courses to this term
         if (selectedTerm != null){
             List<Courses> coursesList = new ArrayList<>();
             try{

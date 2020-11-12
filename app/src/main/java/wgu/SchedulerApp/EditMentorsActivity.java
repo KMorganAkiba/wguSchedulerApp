@@ -36,7 +36,7 @@ public class EditMentorsActivity extends AppCompatActivity {
         mentorEmailTextView = findViewById(R.id.mentorEmailTextView);
         insertMentorDetails();
     }
-
+//populates the text fields with the data from the mentors table
     private void insertMentorDetails(){
         if(selectedMentor != null){
             mentorNameTextView.setText(selectedMentor.getMentor_name());
@@ -47,13 +47,13 @@ public class EditMentorsActivity extends AppCompatActivity {
             selectedMentor = new Mentors();
         }
     }
-
+//handles deletion of a mentor from the table
     public void deleteMentor(View view) {
         db.mentorsDAO().deleteMentor(selectedMentor);
         Intent intent = new Intent(getApplicationContext(),MentorsActivity.class);
         startActivity(intent);
     }
-
+//handles the update of infomation for a mentor and sends it to the database
     public void saveMentor(View view) {
         updateMentor = new Mentors();
         updateMentor.setMentor_id(mentorId);

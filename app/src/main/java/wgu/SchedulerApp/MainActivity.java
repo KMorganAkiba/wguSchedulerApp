@@ -34,18 +34,18 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ViewAllTerms.class);
         startActivity(intent);
     }
-
+//loads sample data into the DB
     public void fillDatabase(View view){
         SampleData sampleData = new SampleData();
         sampleData.fill(getApplicationContext());
         updateProgressData();
     }
-
+//wipes all data from the database
     public void emptyDatabase(View view) {
         db.clearAllTables();
         updateProgressData();
     }
-
+//handles the progress aspect of the main page
     private void updateProgressData(){
 
         int totalCourses = 0;
@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
                     if(coursesList.get(i).getCourse_status().contains("In Progress")) inProgressCourses++;
                     if(coursesList.get(i).getCourse_status().contains("Pending")) inProgressCourses++;
                     if(coursesList.get(i).getCourse_status().contains("Completed")) completedCourses++;
+                    if(coursesList.get(i).getCourse_status().contains("in progress")) inProgressCourses++;
+                    if(coursesList.get(i).getCourse_status().contains("pending")) inProgressCourses++;
+                    if(coursesList.get(i).getCourse_status().contains("completed")) completedCourses++;
                     totalCourses = coursesList.size();
 
                 }
@@ -74,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
             for (int i = 0; i < assessmentsList.size();i++){
                 if(assessmentsList.get(i).getAssessment_status().contains("Completed")) assessmentsCompleted++;
+                if(assessmentsList.get(i).getAssessment_status().contains("completed")) assessmentsCompleted++;
                 totalAssessments = assessmentsList.size();
             }
         } catch (Exception e){
